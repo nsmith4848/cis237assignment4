@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace cis237inclass4
+namespace cis237assignment4
 {
-    class GenericNode<T>
+    public class GenericNode<T>
     {
         public GenericNode<T> Next
         {

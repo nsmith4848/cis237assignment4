@@ -23,6 +23,11 @@ namespace cis237assignment4
             get { return totalCost; }
             set { totalCost = value; }
         }
+        public string Model
+        {
+            get { return this.model; }
+            set { model = value; }
+        }
 
         //Constructor that takes the main 3 parameters shared amongst all 4 types of droids
         public Droid(string Material, string Model, string Color)
@@ -65,6 +70,25 @@ namespace cis237assignment4
             return "Material: " + this.material + Environment.NewLine +
                     "Model: " + this.model + Environment.NewLine +
                     "Color: " + this.color + Environment.NewLine;
+        }
+
+        public int CompareTo(decimal cost, Droid droid2)            //Method used to compare cost of droids-incomplete
+        {
+            this.CalculateTotalCost();
+            droid2.CalculateTotalCost();
+            decimal comparedCost = droid2.TotalCost;
+            if(this.totalCost == comparedCost)
+            {
+                return 0;
+            }
+            else if(this.totalCost < comparedCost)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
         }
     }
 }

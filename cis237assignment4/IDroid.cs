@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace cis237assignment4
 {
-    interface IDroid
+    interface IDroid : IComparable
     {
         //Method to calculate the total cost of a droid
         void CalculateTotalCost();
 
         //property to get the total cost of a droid
         decimal TotalCost { get; set; }
+
+        //property to find the model of droid
+        string Model { get; set; }
     }
 }

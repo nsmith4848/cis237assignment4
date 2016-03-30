@@ -9,7 +9,8 @@ namespace cis237assignment4
     //Class Droid Collection implements the IDroidCollection interface.
     //All methods declared in the Interface must be implemented in this class 
     class DroidCollection : IDroidCollection
-    {
+    { 
+        
         //Private variable to hold the collection of droids
         private IDroid[] droidCollection;
         //Private variable to hold the length of the Collection
@@ -127,7 +128,49 @@ namespace cis237assignment4
 
         public void SortByModel()
         {
-            
+            GenericQueue<Droid> droidQueue = new GenericQueue<Droid>();   //Sets up one queue and a stack for each kind of droid
+            GenericStack<Droid> astStack = new GenericStack<Droid>();
+            GenericStack<Droid> janStacl = new GenericStack<Droid>();
+            GenericStack<Droid> utiStack = new GenericStack<Droid>();
+            GenericStack<Droid> proStack = new GenericStack<Droid>();
+            foreach (Droid droid in droidCollection)                      //Sorts droids into their stacks by the new property model
+            {
+                switch (droid.Model)
+                {
+                    case "Protocol":
+                        proStack.Push(droid);
+                        break;
+                    case "Janitor":
+                        janStacl.Push(droid);
+                        break;
+                    case "Utility":
+                        utiStack.Push(droid);
+                        break;
+                    case "Astromech":
+                        astStack.Push(droid);
+                        break;
+                }
+            }
+            if (astStack.Head != null)                                                 //Puts droids into queue in order
+                droidQueue.Enqueue(astStack.Pop());
+            else if (janStacl.Head != null)
+                droidQueue.Enqueue(janStacl.Pop());
+            else if (utiStack.Head != null)
+                droidQueue.Enqueue(utiStack.Pop());
+            else if (proStack.Head != null)
+                droidQueue.Enqueue(proStack.Pop());
+            int x = 0;
+            while (x <= droidCollection.Length)                                //Re-inserts droids from queue into array
+            {
+                droidCollection[x] = droidQueue.Dequeue();
+                x++;
+            }
         }
-    }
+
+        public void SortByCost()
+        {
+            MergeSort merge = new MergeSort(droidCollection); //Creates an instance of mergesort
+            merge.DoMerge(); //Performs the mergesort
+        }
+    }           
 }
